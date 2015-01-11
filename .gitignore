@@ -1,0 +1,12 @@
+/Test/Debug/
+/Test/Release/
+*.suo
+*.aps
+*.ilk
+*.pdb
+*.sdf
+*.opensdf
+/Debug/server_cfg.ini
+/Debug/Test.exe
+
+
