@@ -68,6 +68,7 @@ BOOL CLogDlg::OnInitDialog()
 	UpdateLayout();
     //for more info see
     // http://www.codeproject.com/Articles/116/Layout-Manager-for-Dialogs-Formviews-DialogBars-an
+	//
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// EXCEPTION: OCX Property Pages should return FALSE
