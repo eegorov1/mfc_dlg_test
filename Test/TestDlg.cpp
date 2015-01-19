@@ -8,20 +8,17 @@
 #include "TestDlg.h"
 #include "LogDlg.h"
 #include "SettingsDialog.h"
+#include "ChartDialog.h"
 #include "afxdialogex.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
 
-
-// CTestDlg dialog
-
 CTestDlg::CTestDlg(CWnd* pParent /*=NULL*/)
 	: CDialogEx(CTestDlg::IDD, pParent)
 	, m_Message(_T(""))
 	, m_UserSelected(_T(""))
-	, m_pLogDlg(NULL)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
@@ -45,6 +42,7 @@ BEGIN_MESSAGE_MAP(CTestDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_SETTINGS, &CTestDlg::OnBnClickedSettings)
 	ON_BN_CLICKED(IDC_BTN_LOG, &CTestDlg::OnBnClickedBtnLog)
 	ON_BN_CLICKED(IDC_TEST, &CTestDlg::OnBnClickedTest)
+	ON_BN_CLICKED(IDC_DRAW, &CTestDlg::OnBnClickedDraw)
 END_MESSAGE_MAP()
 
 
@@ -72,12 +70,7 @@ BOOL CTestDlg::OnInitDialog()
 
 	CButton* pBtn= (CButton*)GetDlgItem(IDC_SETTINGS);
 	pBtn->ModifyStyle( 0, BS_BITMAP );
-	
 	HANDLE hIcn = ::LoadImage(0, "settings.bmp", IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
-
-	//CImage image;
-    //image.Load ( "settings.png" );	
-
 	pBtn->SetBitmap((HBITMAP)hIcn);
 
 	return TRUE;  // return TRUE  unless you set the focus to a control
@@ -131,20 +124,11 @@ void CTestDlg::OnBnClickedConnect()
 	}
 
 	str.Format("Connect: server=%s, port=%s \r\n", Glob.ServerName, "no port yet");
-	if (m_pLogDlg)
-	    m_pLogDlg -> AddLog(str);
+	if (Glob.pLogDlg)
+	    Glob.pLogDlg -> AddLog(str);
 
 	GetDlgItem(IDC_SEND)->EnableWindow(TRUE);
 }
-
-//void CTestDlg::OnBnClickedClearLog()
-//{
-//	int count = m_cLog.GetCount();
-//	for (int i = 0; i < count; i++)
-//	{
-//	   m_cLog.DeleteString(0);
-//	}
-//}
 
 void CTestDlg::OnBnClickedSend()
 {
@@ -162,8 +146,8 @@ void CTestDlg::OnBnClickedSend()
     m_cMsgLog.SetSel(nEnd, nEnd);
 	m_cMsgLog.ReplaceSel(str);
 
-	if (m_pLogDlg)
-	    m_pLogDlg -> AddLog(str);
+	if (Glob.pLogDlg)
+	    Glob.pLogDlg -> AddLog(str);
 }
 
 void CTestDlg::OnBnClickedSettings()
@@ -179,27 +163,27 @@ void CTestDlg::OnBnClickedSettings()
 
 void CTestDlg::OnBnClickedBtnLog()
 {
-	if (m_pLogDlg)
+	if (Glob.pLogDlg)
 		return;
 
-    m_pLogDlg = new CLogDlg(this);
-	if (m_pLogDlg != NULL)
+    Glob.pLogDlg = new CLogDlg(this);
+	if (Glob.pLogDlg != NULL)
 	{
-		BOOL ret = m_pLogDlg->Create(IDD_LOG_DIALOG, this);
+		BOOL ret = Glob.pLogDlg->Create(IDD_LOG_DIALOG, this);
 
 		if (!ret)   //Create failed.
 		{
 			AfxMessageBox(_T("Error creating Log Dialog"));
 		}    
-		m_pLogDlg->ShowWindow(SW_SHOW);
+		Glob.pLogDlg->ShowWindow(SW_SHOW);
 	}
 }
 
 void CTestDlg::OnLogDlgClose(void)
 {
-	if (m_pLogDlg) {
-		delete m_pLogDlg;
-	    m_pLogDlg = NULL;
+	if (Glob.pLogDlg) {
+		delete Glob.pLogDlg;
+	    Glob.pLogDlg = NULL;
 	}
 }
 
@@ -218,4 +202,16 @@ LRESULT CTestDlg::DefWindowProc(UINT message, WPARAM wParam, LPARAM lParam)
 	}
 
 	return CDialogEx::DefWindowProc(message, wParam, lParam);
+}
+
+
+void CTestDlg::OnBnClickedDraw()
+{
+	CChartDialog dlg;
+	if (dlg.DoModal() == IDOK) {
+		//OK btn pressed
+		 UpdateData(FALSE);	
+	} else {
+	    //cancel was pressed
+	}
 }

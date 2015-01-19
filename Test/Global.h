@@ -1,10 +1,18 @@
 #pragma once
+#include "resource.h" 
+#include "LogDlg.h"
+
+typedef std::vector<CPoint> CHART_ARRAY;
+
 class Global
 {
 public:
 	CString ServerName;
+	CString ServerPort;
 	CString Path2Config;
 	CString CurPath;
+
+	CLogDlg * pLogDlg;
 
 	Global(void);
 	~Global(void);

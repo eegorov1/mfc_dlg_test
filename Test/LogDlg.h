@@ -1,10 +1,10 @@
 #pragma once
 #include "afxwin.h"
-
+#include "libs\ETSLayout.h"
 
 // CLogDlg dialog
 
-class CLogDlg : public CDialogEx
+class CLogDlg : public ETSLayoutDialog
 {
 	DECLARE_DYNAMIC(CLogDlg)
 

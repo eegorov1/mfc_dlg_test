@@ -8,10 +8,10 @@
 
 // CLogDlg dialog
 
-IMPLEMENT_DYNAMIC(CLogDlg, CDialogEx)
+IMPLEMENT_DYNAMIC(CLogDlg, ETSLayoutDialog)
 
 CLogDlg::CLogDlg(CWnd* pParent /*=NULL*/)
-	: CDialogEx(CLogDlg::IDD, pParent)
+	: ETSLayoutDialog(CLogDlg::IDD, pParent)
 {
 	m_pMainDlg = pParent;
 	ASSERT(m_pMainDlg!=NULL);
@@ -23,11 +23,11 @@ CLogDlg::~CLogDlg()
 
 void CLogDlg::DoDataExchange(CDataExchange* pDX)
 {
-	CDialogEx::DoDataExchange(pDX);
+	ETSLayoutDialog::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_LOG, m_cLog);
 }
 
-BEGIN_MESSAGE_MAP(CLogDlg, CDialogEx)
+BEGIN_MESSAGE_MAP(CLogDlg, ETSLayoutDialog)
 	ON_BN_CLICKED(IDCANCEL, &CLogDlg::OnBnClickedCancel)
 	ON_BN_CLICKED(IDC_CLEAR_BTN, &CLogDlg::OnBnClickedClearBtn)
 END_MESSAGE_MAP()
@@ -37,7 +37,7 @@ END_MESSAGE_MAP()
 void CLogDlg::OnBnClickedCancel()
 {
 	((CTestDlg*)m_pMainDlg)->PostMessage(WM_USER_LOG_CLOSED);
-	CDialogEx::OnCancel();
+	ETSLayoutDialog::OnCancel();
 	// or make this sync. call after OnCancel():
 	//((CTestDlg*)m_pMainDlg)->OnLogDlgClose();
 }
@@ -58,8 +58,16 @@ void CLogDlg::OnBnClickedClearBtn()
 
 BOOL CLogDlg::OnInitDialog()
 {
-	CDialogEx::OnInitDialog();
+	ETSLayoutDialog::OnInitDialog();
 
+	//To make controls resizable on resizing of the dialog frame: 
+	CreateRoot(VERTICAL)
+		<< item ( IDC_CLEAR_BTN, NORESIZE | ALIGN_RIGHT)
+		<< item ( IDC_LOG, GREEDY );
+	
+	UpdateLayout();
+    //for more info see
+    // http://www.codeproject.com/Articles/116/Layout-Manager-for-Dialogs-Formviews-DialogBars-an
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// EXCEPTION: OCX Property Pages should return FALSE

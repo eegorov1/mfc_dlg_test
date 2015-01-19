@@ -13,6 +13,7 @@ IMPLEMENT_DYNAMIC(CSettingsDialog, CDialog)
 
 CSettingsDialog::CSettingsDialog(CWnd* pParent /*=NULL*/)
 	: CDialog(CSettingsDialog::IDD, pParent)	
+	, m_ServerPort(_T(""))
 {
 }
 
@@ -24,11 +25,13 @@ void CSettingsDialog::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	DDX_Text(pDX, IDC_SERVER_NAME, Glob.ServerName);
+	DDX_Text(pDX, IDC_SETTING_PORT, Glob.ServerPort);
 }
 
 
 BEGIN_MESSAGE_MAP(CSettingsDialog, CDialog)
 	ON_BN_CLICKED(IDOK, &CSettingsDialog::OnBnClickedOk)
+//	ON_EN_CHANGE(IDC_SETTING_PORT, &CSettingsDialog::OnEnChangeSettingPort)
 END_MESSAGE_MAP()
 
 void CSettingsDialog::OnBnClickedOk()
@@ -39,3 +42,5 @@ void CSettingsDialog::OnBnClickedOk()
 
 	CDialog::OnOK();
 }
+
+

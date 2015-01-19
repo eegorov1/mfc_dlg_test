@@ -99,7 +99,9 @@
     <None Include="res\Test.rc2" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ChartDialog.h" />
     <ClInclude Include="Global.h" />
+    <ClInclude Include="libs\ETSLayout.h" />
     <ClInclude Include="LogDlg.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SettingsDialog.h" />
@@ -109,7 +111,9 @@
     <ClInclude Include="TestDlg.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ChartDialog.cpp" />
     <ClCompile Include="Global.cpp" />
+    <ClCompile Include="libs\ETSLayout.cpp" />
     <ClCompile Include="LogDlg.cpp" />
     <ClCompile Include="SettingsDialog.cpp" />
     <ClCompile Include="stdafx.cpp">

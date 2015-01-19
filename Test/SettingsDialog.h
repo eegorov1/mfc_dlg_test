@@ -21,4 +21,6 @@ protected:
 public:
 	afx_msg void OnBnClickedOk();
 	CString m_ServerName;
+//	afx_msg void OnEnChangeSettingPort();
+	CString m_ServerPort;
 };

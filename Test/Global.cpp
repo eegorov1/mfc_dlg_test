@@ -1,13 +1,14 @@
 #include "StdAfx.h"
 #include "Global.h"
 
-
 Global::Global(void) : 
    CurPath(_T("")), 
-   Path2Config(_T("")) 
+   Path2Config(_T("")),
+   pLogDlg(NULL)
 {
 	SetLogPath();
 	ServerName = ReadParam("ServerName");
+	ServerPort = ReadParam("ServerPort");
 }
 
 Global::~Global(void)
@@ -23,7 +24,7 @@ CString & Global::SetLogPath()
 
    CurPath = buf.Left(buf.ReverseFind('\\') + 1);
 
-   Path2Config.Format( "%s%s", CurPath, "server_cfg.ini");
+   Path2Config.Format( "%s%s", CurPath, _T("server_cfg.ini"));
    
    return Path2Config;
 }
@@ -44,4 +45,5 @@ void Global::SaveParam(const char* valName, const char* value, const char* secti
 void Global::SaveAllParams() 
 {
 	Glob.SaveParam("ServerName", Glob.ServerName);
+	Glob.SaveParam("ServerPort", Glob.ServerPort);
 }

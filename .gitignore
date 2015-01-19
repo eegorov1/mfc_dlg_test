@@ -6,6 +6,7 @@
 *.pdb
 *.sdf
 *.opensdf
+/ipch/
 /Debug/server_cfg.ini
 /Debug/Test.exe
 

@@ -48,6 +48,12 @@
     <ClInclude Include="LogDlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="libs\ETSLayout.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ChartDialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Test.cpp">
@@ -66,6 +72,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="LogDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="libs\ETSLayout.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ChartDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -4,7 +4,6 @@
 
 #pragma once
 #include "afxwin.h"
-#include "LogDlg.h"
 
 #define WM_USER_LOG_CLOSED   (WM_USER+1)
 
@@ -24,8 +23,7 @@ public:
 // Implementation
 protected:
 	HICON m_hIcon;
-	CLogDlg * m_pLogDlg;
-
+	
 	// Generated message map functions
 	virtual BOOL OnInitDialog();
 	afx_msg void OnPaint();
@@ -43,4 +41,5 @@ public:
 	void OnLogDlgClose(void);
 	afx_msg void OnBnClickedTest();
 	virtual LRESULT DefWindowProc(UINT message, WPARAM wParam, LPARAM lParam);
+	afx_msg void OnBnClickedDraw();
 };
