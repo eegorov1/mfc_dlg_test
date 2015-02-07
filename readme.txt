@@ -11,6 +11,7 @@ To make controls resizable on resizing of the dialog frame:
 How to convert the project VS2010 back to VS2008:
 http://www.codeproject.com/Tips/80953/Converting-VS-Solution-to-VS
 
-
+How to convert the project VS2010 back to VS2005:
+http://www.codeproject.com/Articles/80001/SolutionConverter
 
 
